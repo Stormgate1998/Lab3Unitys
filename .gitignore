@@ -73,6 +73,12 @@ mono_crash.*
 *.unitypackage.meta
 *.app
 
+*.dylib
+
+[Ll]ibrary/
+
+[Tt]emp/
+
 # Crashlytics generated file
 crashlytics-build.properties
 
