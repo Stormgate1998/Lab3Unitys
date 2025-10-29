@@ -4,6 +4,8 @@
 #
 .utmp/
 /[Ll]ibrary/
+[Ll]ibrary/
+[Tt]emp/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -75,9 +77,7 @@ mono_crash.*
 
 *.dylib
 
-[Ll]ibrary/
 
-[Tt]emp/
 
 # Crashlytics generated file
 crashlytics-build.properties
