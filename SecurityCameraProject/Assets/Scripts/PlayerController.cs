@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,14 +10,21 @@ public class PlayerController : MonoBehaviour
     private bool controllingRobot = false;
     public RobotMovement robot; // assign in Inspector
 
+    private bool canControl = true;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        transform.rotation = new(0, 00, 0, 0);
+        Cursor.visible = false;
+        transform.rotation = Quaternion.identity;
     }
 
     void Update()
     {
+        // Don't do anything if control is disabled
+        if (!canControl)
+            return;
+
         // Toggle control mode
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -42,7 +49,7 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
-        
+
         transform.position += move * moveSpeed * Time.deltaTime;
     }
 
@@ -56,5 +63,21 @@ public class PlayerController : MonoBehaviour
 
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    // 🔹 NEW: Disable control and free the cursor
+    public void DisableControl()
+    {
+        canControl = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    // 🔹 (Optional) Re-enable control and lock the cursor again
+    public void EnableControl()
+    {
+        canControl = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
